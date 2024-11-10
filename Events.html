@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="Script.Js">
+    <script src="https://kit.fontawesome.com/1f03eeb513.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/Inconel Logo.png" class="logo">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Events.html">Events</a></li>
+                <li><a href="Store.html">Store</a></li>
+                <li><a href="Gallery.html">Gallery</a></li>
+                <li><a href="Blog.html">Blog</a></li>
+                <li><a href="Contacts.html">Contacts</a></li>
+                 
+
+            </ul>
+        <div class="social-icons">
+            <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@thisisinconel?lang=en"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://www.instagram.com"><i class="fa-brands fa-square-instagram"></i></a>
+            <a href="https://www.youtube.com"><i class="fa-brands fa-youtube"></i></a>
+            
+        </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <section class="events">
+            <h1>Upcoming Events</h1>
+    
+            <!-- Event Grid -->
+            <div class="event-grid">
+    
+                <!-- Event 1 -->
+                <article class="event">
+                    <img data-src="images/events.jpg" class="event-image">
+                    <div class="event-details">
+                        <h2>Live Concert: Pilgrimage</h2>
+                        <p>Date: September 29, 2024</p>
+                        <p>Time: 2:00 PM</p>
+                        <p>Location: TUK, 123 Music Lane, Nairobi, NB</p>
+                        <p>Join us for an evening of soulful music and harmony. Don’t miss this chance to experience our latest performance live!</p>
+                        <a href="#" class="button">Get Tickets</a>
+                    </div>
+                </article>
+    
+                <!-- Event 2 -->
+                <article class="event">
+                    <img data-src="images/event1.jpg" class="event-image">
+                    <div class="event-details">
+                        <h2>Spiritual Music Workshop</h2>
+                        <p>Date: September 7, 2024</p>
+                        <p>Time: 9:00 AM - 5:00 PM</p>
+                        <p>Location: Parklands SDA Church, 456 Peace Road, Nairobi</p>
+                        <p>Explore the art of spiritual music and learn techniques to connect deeper with your inner self. Open to all levels.</p>
+                        <a href="#" class="button">Register Now</a>
+                    </div>
+                </article>
+    
+                <!-- Add more events as needed -->
+    
+            </div>
+        </section>
+    </div>
+    
+ 
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Inconel Singing Group. All rights reserved.</p>
+        <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+    </footer>
+
+</div>
+</body>
+</html>
+
+<script>
+    // Function to handle scrolling and animation on event cards
+    document.addEventListener('DOMContentLoaded', function () {
+        const eventElements = document.querySelectorAll('.event');
+    
+        function revealEvents() {
+            const triggerBottom = window.innerHeight / 1.1;
+    
+            eventElements.forEach(event => {
+                const eventTop = event.getBoundingClientRect().top;
+    
+                if (eventTop < triggerBottom) {
+                    event.classList.add('show');
+                }
+            });
+        }
+    
+        window.addEventListener('scroll', revealEvents);
+    
+        // Initially reveal the events that are already in view
+        revealEvents();
+    });
+    
+    // Lazy loading for event images
+    document.addEventListener('DOMContentLoaded', function () {
+        const images = document.querySelectorAll('.event-image');
+    
+        function preloadImage(img) {
+            const src = img.getAttribute('data-src');
+            if (!src) return;
+            img.src = src;
+        }
+    
+        const imageOptions = {
+            threshold: 0,
+            rootMargin: '0px 0px 200px 0px'
+        };
+    
+        const imageObserver = new IntersectionObserver((entries, imageObserver) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                preloadImage(entry.target);
+                imageObserver.unobserve(entry.target);
+            });
+        }, imageOptions);
+    
+        images.forEach(image => {
+            imageObserver.observe(image);
+        });
+    });
+    </script>
+    
